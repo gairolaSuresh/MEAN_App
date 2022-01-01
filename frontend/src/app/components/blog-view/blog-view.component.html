@@ -1,0 +1,19 @@
+<div class="row mt-5" *ngIf="allBlogs.length">
+  <div class="col-md-4 mb-3" *ngFor="let blog of allBlogs">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title" *ngIf="blog">{{ blog?.title }}
+          <span class="delete-blog" (click)="deleteBlog(blog._id)" *ngIf="user.type =='Admin' " >
+            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;
+          </span>
+        </h5>
+        <p class="card-text" *ngIf="blog">{{ blog?.description }}</p>
+        <a *ngIf="!blog.status && user.type =='Admin' " class="btn btn-success" (click)="approveBlog(blog._id)">Approved</a>
+        <a *ngIf="blog.status" class="btn btn-primary">Active</a>
+      </div>
+      <div class="card-footer text-muted" *ngIf="blog">
+        {{ blog?.createdAt | date }}
+      </div>
+    </div>
+  </div>
+</div>
